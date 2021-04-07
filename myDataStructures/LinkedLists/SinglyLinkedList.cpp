@@ -24,23 +24,28 @@ class SinglyLinkedList {
         void printList();
 };
 
+// CONSTRUCTOR = initialize head and tail pointers to NULL
 SinglyLinkedList::SinglyLinkedList() {
     head = NULL;
     tail = NULL;
 }
 
+// checks if the list has any contents
 bool SinglyLinkedList::isEmpty() {
     return (head == NULL);
 }
 
+// returns the value of head's data
 int SinglyLinkedList::front() {
     return (head->data);
 }
 
+// returns the value of tail's data
 int SinglyLinkedList::back() {
     return (tail->data);
 }
 
+// helper function for printing the linked list
 void SinglyLinkedList::printList() {
     node* trav = head;
     while (trav != NULL) {
@@ -50,6 +55,7 @@ void SinglyLinkedList::printList() {
     cout << "NULL" << endl;
 }
 
+// adds a node to the end of the list
 void SinglyLinkedList::append(int val) {
     node* newNode = new node;
     newNode->data = val;
@@ -64,11 +70,32 @@ void SinglyLinkedList::append(int val) {
     newNode->next = NULL;
 }
 
+// adds a node to the front of the list
+void SinglyLinkedList::prepend(int val) {
+    node* newNode = new node;
+    newNode->data = val;
+    if(isEmpty()) {
+        head = newNode;
+        tail = newNode;
+        newNode->next = NULL;
+    }
+    else {
+        newNode->next = head;
+        head = newNode;
+    }
+}
+
 int main() {
     SinglyLinkedList list;
     //cout << "Result of isEmpty() : " << list.isEmpty() << endl;
     for (int i = 1; i < 5; i++) {
         list.append(i);
+    }
+    list.printList();
+    //cout << "The front of the list is: " << list.front() << endl;
+    //cout << "The back of the list is: " << list.back() << endl;
+    for (int i = 10; i > 5; i--) {
+        list.prepend(i);
     }
     list.printList();
     return 0;
