@@ -22,6 +22,7 @@ class SinglyLinkedList {
         int front();
         int back();
         void printList();
+        void reverseList();
 };
 
 // CONSTRUCTOR = initialize head and tail pointers to NULL
@@ -85,6 +86,24 @@ void SinglyLinkedList::prepend(int val) {
     }
 }
 
+void SinglyLinkedList::reverseList() {
+    node* dummyHead = new node;
+    dummyHead->data = 0;
+    dummyHead->next = head;
+
+    while(head->next != NULL) {
+        node* oldHead = dummyHead->next;
+        node* newHead = head->next;
+
+        dummyHead->next = newHead;
+        head->next = newHead->next;
+        newHead->next = oldHead;
+    }
+    head = dummyHead->next;
+    delete dummyHead;
+    printList();
+}
+
 int main() {
     SinglyLinkedList list;
     //cout << "Result of isEmpty() : " << list.isEmpty() << endl;
@@ -94,10 +113,14 @@ int main() {
     list.printList();
     //cout << "The front of the list is: " << list.front() << endl;
     //cout << "The back of the list is: " << list.back() << endl;
-    for (int i = 10; i > 5; i--) {
-        list.prepend(i);
-    }
-    list.printList();
+
+    // for (int i = 10; i > 5; i--) {
+    //     list.prepend(i);
+    // }
+    // list.printList();
+
+    list.reverseList();
+
     return 0;
 }
 
