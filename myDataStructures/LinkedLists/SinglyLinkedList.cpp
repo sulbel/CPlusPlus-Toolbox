@@ -23,6 +23,7 @@ class SinglyLinkedList {
         int back();
         void printList();
         void reverseList();
+        void middleOfList();
 };
 
 // CONSTRUCTOR = initialize head and tail pointers to NULL
@@ -86,6 +87,7 @@ void SinglyLinkedList::prepend(int val) {
     }
 }
 
+// reverses the linked list
 void SinglyLinkedList::reverseList() {
     node* dummyHead = new node;
     dummyHead->data = 0;
@@ -104,6 +106,17 @@ void SinglyLinkedList::reverseList() {
     printList();
 }
 
+// finds the middle value of the linked list
+void SinglyLinkedList::middleOfList() {
+    node* slowPtr = head;
+    node* fastPtr = head;
+    while(fastPtr != NULL && fastPtr->next != NULL) {
+        slowPtr = slowPtr->next;
+        fastPtr = fastPtr->next->next;
+    }
+    cout << "The middle of the linked list is: " << slowPtr->data << "." << endl;
+}
+
 int main() {
     SinglyLinkedList list;
     //cout << "Result of isEmpty() : " << list.isEmpty() << endl;
@@ -111,6 +124,7 @@ int main() {
         list.append(i);
     }
     list.printList();
+    list.middleOfList();
     //cout << "The front of the list is: " << list.front() << endl;
     //cout << "The back of the list is: " << list.back() << endl;
 
@@ -120,6 +134,7 @@ int main() {
     // list.printList();
 
     list.reverseList();
+    list.middleOfList();
 
     return 0;
 }
